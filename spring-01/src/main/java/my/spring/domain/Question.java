@@ -2,15 +2,17 @@ package my.spring.domain;
 
 public class Question {
 
-    private final int number;
-    private final String text;
+    private String number;
+    private String text;
 
-    public Question(int number, String text) {
-        this.number = number;
-        this.text = text;
+    public Question() {
     }
 
     public String getText() { return text; }
 
-    public int getNumber() { return number; }
+    public void setText(String text) { this.text = text; }
+
+    public String getNumber() { return number; }
+
+    public void setNumber(String number) { this.number = number; }
 }
