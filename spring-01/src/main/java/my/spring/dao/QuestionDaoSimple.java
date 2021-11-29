@@ -3,6 +3,7 @@ package my.spring.dao;
 import my.spring.domain.Question;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,11 +12,17 @@ import java.util.Scanner;
 
 public class QuestionDaoSimple implements QuestionDao {
     public List<Question> getQuestionList(String str) {
+        File file = new File(getClass().getClassLoader().getResource(str).getFile());
+        if (file == null) {
+            System.out.println("Файл не найден");
+            return null;
+        }
+
         FileReader fileReader = null;
         try {
-            fileReader = new FileReader(str);
+            fileReader = new FileReader(file);
         } catch (IOException e) {
-            System.out.println("Ошибка стения файла");
+            System.out.println("Ошибка чтения файла");
             return null;
         }
         BufferedReader reader = new BufferedReader(fileReader);

@@ -7,9 +7,12 @@ import java.util.List;
 public class QuestionServiceImpl implements QuestionService{
     private final QuestionDao dao;
 
-    public QuestionServiceImpl(QuestionDao dao) {
+    private final String str;
+
+    public QuestionServiceImpl(QuestionDao dao, String str) {
         this.dao = dao;
+        this.str = str;
     }
 
-    public List<Question> getQuestionList(String str) { return dao.getQuestionList(str); }
+    public List<Question> getQuestionList() { return dao.getQuestionList(str); }
 }

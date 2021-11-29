@@ -4,5 +4,5 @@ import my.spring.domain.Question;
 import java.util.List;
 
 public interface QuestionService {
-    List<Question> getQuestionList(String str);
+    List<Question> getQuestionList();
 }
