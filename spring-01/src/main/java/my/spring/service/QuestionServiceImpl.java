@@ -7,12 +7,12 @@ import java.util.List;
 public class QuestionServiceImpl implements QuestionService{
     private final QuestionDao dao;
 
-    private final String str;
+    private final String fileName;
 
-    public QuestionServiceImpl(QuestionDao dao, String str) {
+    public QuestionServiceImpl(QuestionDao dao, String fileName) {
         this.dao = dao;
-        this.str = str;
+        this.fileName = fileName;
     }
 
-    public List<Question> getQuestionList() { return dao.getQuestionList(str); }
+    public List<Question> getQuestionList() { return dao.getQuestionList(fileName); }
 }

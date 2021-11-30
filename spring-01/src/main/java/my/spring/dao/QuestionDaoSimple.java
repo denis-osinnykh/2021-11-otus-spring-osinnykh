@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class QuestionDaoSimple implements QuestionDao {
-    public List<Question> getQuestionList(String str) {
-        File file = new File(getClass().getClassLoader().getResource(str).getFile());
+    public List<Question> getQuestionList(String fileName) {
+        File file = new File(getClass().getClassLoader().getResource(fileName).getFile());
         if (file == null) {
             System.out.println("Файл не найден");
             return null;
@@ -30,7 +30,8 @@ public class QuestionDaoSimple implements QuestionDao {
         String line = null;
         Scanner scanner = null;
         int index = 0;
-        List<Question> qList = new ArrayList<>();
+        int rowNum = 1;
+        List<Question> questionList = new ArrayList<>();
 
         do {
             try {
@@ -39,20 +40,25 @@ public class QuestionDaoSimple implements QuestionDao {
                 System.out.println("Ошибка чтения строки");
                 break;
             }
-            Question q = new Question();
-            scanner = new Scanner(line);
-            scanner.useDelimiter(",");
-            while (scanner.hasNext()) {
-                String data = scanner.next();
-                if (index == 0)
-                    q.setText(data);
-                else
-                    System.out.println("Некорректные данные::" + data);
-                q.setNumber(Integer.toString(index));
-                index++;
+
+            if (line != null) {
+                Question question = new Question();
+                scanner = new Scanner(line);
+                scanner.useDelimiter(",");
+                while (scanner.hasNext()) {
+                    String data = scanner.next();
+                    if (index == 0)
+                        question.setText(data);
+                    else
+                        System.out.println("Некорректные данные::" + data);
+                    question.setNumber(Integer.toString(rowNum));
+                    index++;
+                }
+                index = 0;
+                if (question.getText() != null)
+                    questionList.add(question);
+                rowNum++;
             }
-            index = 0;
-            qList.add(q);
         }
         while (line != null);
 
@@ -62,6 +68,6 @@ public class QuestionDaoSimple implements QuestionDao {
             System.out.println("Ошибка закрытия ридера");
         }
 
-        return qList;
+        return questionList;
     }
 }

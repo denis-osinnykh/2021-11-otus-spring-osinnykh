@@ -9,7 +9,7 @@
 
     <bean id="questionService" class="my.spring.service.QuestionServiceImpl">
         <constructor-arg name="dao" ref="questionDao"/>
-        <constructor-arg name="str" value="questions.csv"/>
+        <constructor-arg name="fileName" value="questions.csv"/>
     </bean>
 
 </beans>
