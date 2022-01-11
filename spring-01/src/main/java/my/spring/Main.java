@@ -11,9 +11,6 @@ public class Main {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("/spring-context.xml");
         QuestionService questionBean = context.getBean(QuestionService.class);
 
-        List<Question> questionList = questionBean.getQuestionList();
-        for (Question question: questionList) {
-            System.out.println(question.getNumber() + ". " +  question.getText());
-        }
+        questionBean.printQuestionList();
     }
 }
