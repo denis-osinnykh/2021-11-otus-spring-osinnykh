@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>spring</groupId>
-    <artifactId>spring-02</artifactId>
+    <artifactId>spring-01</artifactId>
     <version>1.0</version>
 
     <properties>
