@@ -3,7 +3,6 @@ package my.spring.service;
 import my.spring.dao.QuestionDao;
 import my.spring.domain.Question;
 import java.util.List;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class QuestionServiceImpl implements QuestionService{
@@ -21,7 +20,7 @@ public class QuestionServiceImpl implements QuestionService{
 
         for (Question question: this.questionList) {
             printOneQuestion(question);
-            String answer = readAnswer().trim();
+            String answer = readAnswer();
 
             String requiredAnswer = question.getAnswer();
             if (answer.equalsIgnoreCase(requiredAnswer))
@@ -29,9 +28,9 @@ public class QuestionServiceImpl implements QuestionService{
         }
 
         if (countAnswer >= requiredAnswerCount)
-            System.out.println("Test passed successfully");
+            System.out.println("Test passed successfully!");
         else
-            System.out.println("Test failed");
+            System.out.println("Test failed!");
     }
 
     public List<Question> getQuestionList() {
@@ -43,12 +42,14 @@ public class QuestionServiceImpl implements QuestionService{
         }
     }
 
+    //Нужен был для отладки
     public void printQuestionList() {
         for (Question question: this.questionList) {
             printOneQuestion(question);
         }
     }
 
+    //Не пригодился
     public void findOneQuestion(int index) {
         for (Question question: this.questionList) {
             if (question.getNumber() == index)
@@ -61,15 +62,17 @@ public class QuestionServiceImpl implements QuestionService{
     }
 
     public String readAnswer() {
-        String answer = null;
+        String answer = "";
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter your answer:");
 
         if (scanner.hasNextLine()) {
             answer = scanner.nextLine();
-            System.out.println("Thanks for your answer!");
-        } else {
-            System.out.println("Enter your answer again!");
+            while (answer.equals("") || answer == null) {
+                System.out.println("Enter your answer again.");
+                answer = scanner.nextLine();
+            }
+            System.out.println("Thanks for your answer.");
         }
 
         return answer;
