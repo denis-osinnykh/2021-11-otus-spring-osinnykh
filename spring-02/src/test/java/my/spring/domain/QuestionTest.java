@@ -11,7 +11,7 @@ class QuestionTest {
     @DisplayName("корректно возвращает текст")
     @Test
     void shouldHaveGetText() {
-        Question question = new Question(1, "Test question");
+        Question question = new Question(1, "Test question", "Test answer");
 
         assertEquals("Test question", question.getText());
     }

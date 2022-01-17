@@ -20,7 +20,7 @@ public class QuestionDaoSimple implements QuestionDao {
         this.fileName = fileName;
     }
 
-    public List<Question> getQuestionList() throws Exception {
+    public List<Question> readQuestionList() throws Exception {
         List<Question> questionList = new ArrayList<>();
 
         try(InputStream output = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName)) {
@@ -29,7 +29,8 @@ public class QuestionDaoSimple implements QuestionDao {
                 throw new Exception("Ошибка чтения ресурса");
 
             String line = null;
-            Scanner scanner = null;
+            Scanner LineScanner = null;
+            Scanner questionScanner = null;
             int index = 0;
             int rowNum = 1;
 
@@ -42,21 +43,30 @@ public class QuestionDaoSimple implements QuestionDao {
 
                 if (line != null) {
                     String text = null;
+                    String answer = null;
                     int number = 0;
-                    scanner = new Scanner(line);
-                    scanner.useDelimiter(",");
-                    while (scanner.hasNext()) {
-                        String data = scanner.next();
-                        if (index == 0)
-                            text = data;
+                    LineScanner = new Scanner(line);
+                    LineScanner.useDelimiter(",");
+                    while (LineScanner.hasNext()) {
+                        String questionString = LineScanner.next();
+                        if (index == 0) {
+                            questionScanner = new Scanner(questionString).useDelimiter("\\?");
+                            while (questionScanner.hasNext()) {
+                                String questionText = questionScanner.next();
+                                if (text == null)
+                                    text = questionText;
+                                else
+                                    answer = questionText;
+                            }
+                        }
                         else
-                            throw new Exception("Некорректные данные::" + data);
+                            throw new Exception("Некорректные данные::" + questionString);
                         number = rowNum;
                         index++;
                     }
                     index = 0;
                     if (text != null)
-                        questionList.add(new Question(number, text));
+                        questionList.add(new Question(number, text, answer));
                     rowNum++;
                 }
             }
