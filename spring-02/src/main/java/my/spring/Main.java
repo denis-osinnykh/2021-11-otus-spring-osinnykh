@@ -12,6 +12,7 @@ public class Main {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Main.class);
         QuestionService questionBean = context.getBean(QuestionService.class);
 
-        questionBean.printQuestionList();
+        //questionBean.printQuestionList();
+        questionBean.runTest();
     }
 }

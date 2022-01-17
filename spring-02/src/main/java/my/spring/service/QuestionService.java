@@ -6,5 +6,5 @@ import java.util.List;
 public interface QuestionService {
     List<Question> getQuestionList();
 
-    void printQuestionList();
+    void runTest();
 }
