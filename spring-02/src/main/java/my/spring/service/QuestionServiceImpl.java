@@ -22,6 +22,8 @@ public class QuestionServiceImpl implements QuestionService{
     public void runTest() {
         int countAnswer = 0;
 
+        String name = readName();
+
         for (Question question: this.questionList) {
             printOneQuestion(question);
             String answer = readAnswer();
@@ -31,10 +33,7 @@ public class QuestionServiceImpl implements QuestionService{
                 countAnswer++;
         }
 
-        if (countAnswer >= requiredAnswerCount)
-            System.out.println("Test passed successfully!");
-        else
-            System.out.println("Test failed!");
+        getTestResult(name, countAnswer);
     }
 
     public List<Question> getQuestionList() {
@@ -80,5 +79,29 @@ public class QuestionServiceImpl implements QuestionService{
         }
 
         return answer;
+    }
+
+    public String readName() {
+        String name = "";
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter your name:");
+
+        if (scanner.hasNextLine()) {
+            name = scanner.nextLine();
+            while (name.equals("") || name == null) {
+                System.out.println("Enter your name again.");
+                name = scanner.nextLine();
+            }
+            System.out.println("Thank you.");
+        }
+
+        return name;
+    }
+
+    public void getTestResult(String name, int countAnswer) {
+        if (countAnswer >= requiredAnswerCount)
+            System.out.println(name + ", your test passed successfully!");
+        else
+            System.out.println(name + ", your test failed! " + countAnswer + " of " + requiredAnswerCount);
     }
 }
