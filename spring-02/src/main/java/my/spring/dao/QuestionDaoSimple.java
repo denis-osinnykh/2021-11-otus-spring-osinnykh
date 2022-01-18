@@ -1,6 +1,7 @@
 package my.spring.dao;
 
 import my.spring.domain.Question;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;

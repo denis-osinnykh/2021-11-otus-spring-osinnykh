@@ -2,12 +2,17 @@ package my.spring.service;
 
 import my.spring.dao.QuestionDao;
 import my.spring.domain.Question;
+import org.springframework.beans.factory.annotation.Value;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class QuestionServiceImpl implements QuestionService{
     private final QuestionDao dao;
     private final List<Question> questionList;
+    @Value("${requiredAnswerCount}")
+    private int requiredAnswerCount;
 
     public QuestionServiceImpl(QuestionDao dao) {
         this.dao = dao;
@@ -16,7 +21,6 @@ public class QuestionServiceImpl implements QuestionService{
 
     public void runTest() {
         int countAnswer = 0;
-        int requiredAnswerCount = 3;
 
         for (Question question: this.questionList) {
             printOneQuestion(question);
@@ -38,7 +42,7 @@ public class QuestionServiceImpl implements QuestionService{
             return dao.readQuestionList();
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return null;
+            return new ArrayList<>();
         }
     }
 
