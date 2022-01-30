@@ -1,0 +1,11 @@
+dao:
+  file-name: questions.csv
+  language: EN
+service:
+  required-answer-count: 3
+input-output:
+  locale: en_EN
+
+spring:
+  messages:
+    basename: i18n/messages
