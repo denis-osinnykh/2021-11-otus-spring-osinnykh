@@ -16,17 +16,11 @@ public class QuestionServiceImpl implements QuestionService {
 
     private final InputOutputService io;
 
-    //private final List<Question> questionList;
-//    public void setRequiredAnswerCount(int requiredAnswerCount) {
-//        this.requiredAnswerCount = requiredAnswerCount;
-//    }
-
     @Autowired
     public QuestionServiceImpl(QuestionDao dao, ServiceConfig config, InputOutputService io) {
         this.dao = dao;
         this.config = config;
         this.io = io;
-        //this.questionList = getQuestionList();
     }
 
     public void runTest() {
@@ -46,7 +40,7 @@ public class QuestionServiceImpl implements QuestionService {
         }
 
         if (countQuestion == 0) {
-            io.outputString("strings.list_is_empty", null);
+            System.out.println(io.getOutputString("strings.list_is_empty", null));
         }
         else
             getTestResult(name, countAnswer);
@@ -82,15 +76,15 @@ public class QuestionServiceImpl implements QuestionService {
     public String readAnswer() {
         String answer = "";
         Scanner scanner = new Scanner(System.in);
-        io.outputString("strings.enter_the_answer", null);
+        System.out.println(io.getOutputString("strings.enter_the_answer", null));
 
         if (scanner.hasNextLine()) {
             answer = scanner.nextLine();
-            while (answer.equals("") || answer == null) {
-                io.outputString("strings.enter_the_answer_again", null);
+            while (answer.equals("")) {
+                System.out.println(io.getOutputString("strings.enter_the_answer_again", null));
                 answer = scanner.nextLine();
             }
-            io.outputString("strings.thank_you", null);
+            System.out.println(io.getOutputString("strings.thank_you", null));
         }
 
         return answer;
@@ -99,15 +93,15 @@ public class QuestionServiceImpl implements QuestionService {
     public String readName() {
         String name = "";
         Scanner scanner = new Scanner(System.in);
-        io.outputString("strings.enter_the_name", null);
+        System.out.println(io.getOutputString("strings.enter_the_name", null));
 
         if (scanner.hasNextLine()) {
             name = scanner.nextLine();
-            while (name.equals("") || name == null) {
-                io.outputString("strings.enter_the_name_again", null);
+            while (name.equals("")) {
+                System.out.println(io.getOutputString("strings.enter_the_name_again", null));
                 name = scanner.nextLine();
             }
-            io.outputString("strings.thank_you", null);
+            System.out.println(io.getOutputString("strings.thank_you", null));
         }
 
         return name;
@@ -116,8 +110,8 @@ public class QuestionServiceImpl implements QuestionService {
     public void getTestResult(String name, int countAnswer) {
         int requiredAnswerCount = config.getRequiredAnswerCount();
         if (countAnswer >= requiredAnswerCount)
-            io.outputString("strings.test_passed_successfully", new String[] {name});
+            System.out.println(io.getOutputString("strings.test_passed_successfully", new String[] {name}));
         else
-            io.outputString("strings.test_passed_failed", new Object[] {name, countAnswer, requiredAnswerCount});
+            System.out.println(io.getOutputString("strings.test_passed_failed", new Object[] {name, countAnswer, requiredAnswerCount}));
     }
 }
