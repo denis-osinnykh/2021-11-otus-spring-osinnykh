@@ -14,11 +14,6 @@ import java.util.Scanner;
 
 @Service
 public class QuestionDaoSimple implements QuestionDao {
-    //private final String fileName;
-//
-//    public void setFileName(String fileName) {
-//        this.fileName = fileName;
-//    }
 
     private final DaoConfig config;
 

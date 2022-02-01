@@ -7,29 +7,20 @@ import org.springframework.stereotype.Component;
 @Component
 public class DaoConfig {
 
-    private String fileName;
+    private final String fileName = "questions.csv";
 
     public String getFileName() {
         return fileName;
     }
 
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-
     private String language;
 
-    public String getLanguage() {
-        if (language != null)
-            return language;
+    public String getLanguage() { return language; }
+
+    public void setLanguage(String language) {
+        if (language != "")
+            this.language = language;
         else
-            return "";
+            this.language = "RU";
     }
-
-    public void setLanguage(String language) { this.language = language;}
-
-    //@Bean
-//    public QuestionDao questionDao() {
-//        return new QuestionDaoSimple(getFile());
-//    }
 }

@@ -4,6 +4,7 @@ import my.spring.config.ServiceConfig;
 import my.spring.dao.QuestionDao;
 import my.spring.domain.Question;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -46,10 +47,12 @@ public class QuestionServiceImpl implements QuestionService {
             getTestResult(name, countAnswer);
     }
 
+    @Cacheable(cacheNames="questions")
     public List<Question> getQuestionList() {
         try {
             return dao.readQuestionList();
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             return new ArrayList<>();
         }
     }
