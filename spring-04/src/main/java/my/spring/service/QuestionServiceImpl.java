@@ -17,10 +17,20 @@ public class QuestionServiceImpl implements QuestionService {
 
     private final InputOutputService io;
 
-    public String name;
+    private String name;
+    public String getName() { return this.name; }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public int countAnswer=0;
+    private int countAnswer=0;
+    public int getCountAnswer() {return this.countAnswer; }
+    public void setCountAnswer(int countAnswer) {
+        this.countAnswer = countAnswer;
+    }
+
     public int countQuestion=0;
+    public resultEnum testResult;
 
     @Autowired
     public QuestionServiceImpl(QuestionDao dao, ServiceConfig config, InputOutputService io) {
@@ -30,7 +40,7 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     public void runTest() {
-        name = readName();
+        setName(readName());
 
         for (Question question: getQuestionList()) {
             printOneQuestion(question);
@@ -43,10 +53,22 @@ public class QuestionServiceImpl implements QuestionService {
         }
 
         if (countQuestion == 0) {
-            System.out.println(io.getOutputString("strings.list_is_empty", null));
+            io.printString("strings.list_is_empty", null);
         }
-        else
-            getTestResult();
+        else {
+            testResult = getTestResult();
+            switch (testResult) {
+                case EMPTY:
+                    io.printString("strings.list_is_empty", null);
+                    break;
+                case PASSED:
+                    io.printString("strings.test_passed_successfully", new String[] {name});
+                    break;
+                case FAILED:
+                    io.printString("strings.test_passed_failed", new Object[] {name, countAnswer, config.getRequiredAnswerCount()});
+                    break;
+            }
+        }
     }
 
     @Cacheable(cacheNames="questions")
@@ -112,16 +134,24 @@ public class QuestionServiceImpl implements QuestionService {
         return name;
     }
 
-    public void getTestResult() {
+    public resultEnum getTestResult() {
         if (name == null) {
-            System.out.println(io.getOutputString("strings.no_test_results_yet", null));
-            return;
+            //System.out.println(io.getOutputString("strings.no_test_results_yet", null));
+            return resultEnum.EMPTY;
         }
 
-        int requiredAnswerCount = config.getRequiredAnswerCount();
-        if (countAnswer >= requiredAnswerCount)
-            System.out.println(io.getOutputString("strings.test_passed_successfully", new String[] {name}));
+        //int requiredAnswerCount = config.getRequiredAnswerCount();
+        if (countAnswer >= config.getRequiredAnswerCount())
+            return resultEnum.PASSED;
+            //System.out.println(io.getOutputString("strings.test_passed_successfully", new String[] {name}));
         else
-            System.out.println(io.getOutputString("strings.test_passed_failed", new Object[] {name, countAnswer, requiredAnswerCount}));
+            return resultEnum.FAILED;
+            //System.out.println(io.getOutputString("strings.test_passed_failed", new Object[] {name, countAnswer, requiredAnswerCount}));
     }
+}
+
+enum resultEnum {
+    EMPTY,
+    FAILED,
+    PASSED
 }

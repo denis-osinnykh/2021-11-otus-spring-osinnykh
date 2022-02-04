@@ -30,4 +30,8 @@ public class InputOutputService {
 
         return messageSource.getMessage(key, params, locale);
     }
+
+    public void printString(String key, Object[] params) {
+        System.out.println(getOutputString(key, params));
+    }
 }
