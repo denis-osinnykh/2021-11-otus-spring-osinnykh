@@ -1,0 +1,12 @@
+dao:
+  language: RU
+service:
+  required-answer-count: 3
+input-output:
+  locale: ru_RU
+
+spring:
+  messages:
+    basename: messages
+  main:
+    allow-circular-references: true
