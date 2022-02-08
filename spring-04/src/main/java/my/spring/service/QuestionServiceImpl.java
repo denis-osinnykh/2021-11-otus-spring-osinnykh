@@ -52,23 +52,7 @@ public class QuestionServiceImpl implements QuestionService {
             countQuestion++;
         }
 
-        if (countQuestion == 0) {
-            io.printString("strings.list_is_empty", null);
-        }
-        else {
-            testResult = getTestResult();
-            switch (testResult) {
-                case EMPTY:
-                    io.printString("strings.list_is_empty", null);
-                    break;
-                case PASSED:
-                    io.printString("strings.test_passed_successfully", new String[] {name});
-                    break;
-                case FAILED:
-                    io.printString("strings.test_passed_failed", new Object[] {name, countAnswer, config.getRequiredAnswerCount()});
-                    break;
-            }
-        }
+        printConsoleTestResult();
     }
 
     @Cacheable(cacheNames="questions")
@@ -133,6 +117,26 @@ public class QuestionServiceImpl implements QuestionService {
             return resultEnum.PASSED;
         else
             return resultEnum.FAILED;
+    }
+
+    public void printConsoleTestResult() {
+        if (countQuestion == 0) {
+            io.printString("strings.list_is_empty", null);
+        }
+        else {
+            testResult = getTestResult();
+            switch (testResult) {
+                case EMPTY:
+                    io.printString("strings.list_is_empty", null);
+                    break;
+                case PASSED:
+                    io.printString("strings.test_passed_successfully", new String[] {name});
+                    break;
+                case FAILED:
+                    io.printString("strings.test_passed_failed", new Object[] {name, countAnswer, config.getRequiredAnswerCount()});
+                    break;
+            }
+        }
     }
 }
 

@@ -17,8 +17,8 @@ public class ApplicationCommands {
         qs.runTest();
     }
 
-    @ShellMethod(value = "Get test result", key = {"g", "get"})
-    public void getTestResult() {
-        qs.getTestResult();
+    @ShellMethod(value = "Print test result", key = {"p", "print"})
+    public void printConsoleTestResult() {
+        qs.printConsoleTestResult();
     }
 }

@@ -8,5 +8,5 @@ public interface QuestionService {
 
     void runTest();
 
-    resultEnum getTestResult();
+    void printConsoleTestResult();
 }
