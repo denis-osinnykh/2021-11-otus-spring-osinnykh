@@ -6,3 +6,5 @@
 <b>Структура репозитория:</b>
 <li>/spring-01 - ДЗ 1</li>
 <li>/spring-02 - ДЗ 2</li>
+<li>/spring-03 - ДЗ 3</li>
+<li>/spring-04 - ДЗ 4</li>

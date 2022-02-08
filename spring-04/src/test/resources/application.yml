@@ -1,0 +1,15 @@
+dao:
+  language: EN
+service:
+  required-answer-count: 3
+input-output:
+  locale: en_EN
+
+spring:
+  messages:
+    basename: messages
+  main:
+    allow-circular-references: true
+  shell:
+    interactive:
+      enabled: false
