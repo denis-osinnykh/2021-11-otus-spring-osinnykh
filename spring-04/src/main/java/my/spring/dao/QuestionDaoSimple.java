@@ -14,7 +14,6 @@ import java.util.Scanner;
 
 @Service
 public class QuestionDaoSimple implements QuestionDao {
-
     private final DaoConfig config;
 
     @Autowired

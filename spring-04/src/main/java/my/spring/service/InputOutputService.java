@@ -6,6 +6,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 
 import java.util.Locale;
+import java.util.Scanner;
 
 @ConfigurationProperties(prefix = "input-output")
 @Component
@@ -33,5 +34,15 @@ public class InputOutputService {
 
     public void printString(String key, Object[] params) {
         System.out.println(getOutputString(key, params));
+    }
+
+    public String readString(String key, Object[] params) {
+        printString(key, params);
+
+        Scanner scanner = new Scanner(System.in);
+        if (scanner.hasNextLine()) {
+            return scanner.nextLine();
+        }
+        else return "";
     }
 }

@@ -9,8 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @DisplayName("Класс InputOutputService")
-class InputOutputServiceTest {
-
+public class InputOutputServiceTest {
     private InputOutputService io;
 
     @Autowired

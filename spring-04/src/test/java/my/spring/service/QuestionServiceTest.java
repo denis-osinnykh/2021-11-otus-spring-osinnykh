@@ -4,14 +4,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @DisplayName("QuestionServiceImpl")
 public class QuestionServiceTest {
-    private QuestionServiceImpl qs;
+    private final QuestionServiceImpl qs;
 
     @Autowired
     public QuestionServiceTest(QuestionServiceImpl qs) {

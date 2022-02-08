@@ -1,9 +1,9 @@
 dao:
-  language: RU
+  language: EN
 service:
   required-answer-count: 3
 input-output:
-  locale: ru_RU
+  locale: en_EN
 
 spring:
   messages:

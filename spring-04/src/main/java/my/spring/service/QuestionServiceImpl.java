@@ -102,51 +102,37 @@ public class QuestionServiceImpl implements QuestionService {
 
     public String readAnswer() {
         String answer = "";
-        Scanner scanner = new Scanner(System.in);
-        System.out.println(io.getOutputString("strings.enter_the_answer", null));
+        answer = io.readString("strings.enter_the_answer", null);
 
-        if (scanner.hasNextLine()) {
-            answer = scanner.nextLine();
-            while (answer.equals("")) {
-                System.out.println(io.getOutputString("strings.enter_the_answer_again", null));
-                answer = scanner.nextLine();
-            }
-            System.out.println(io.getOutputString("strings.thank_you", null));
+        while (answer.equals("")) {
+            answer = io.readString("strings.enter_the_answer_again", null);
         }
+        io.printString("strings.thank_you", null);
 
         return answer;
     }
 
     public String readName() {
         String name = "";
-        Scanner scanner = new Scanner(System.in);
-        System.out.println(io.getOutputString("strings.enter_the_name", null));
+        name = io.readString("strings.enter_the_name", null);
 
-        if (scanner.hasNextLine()) {
-            name = scanner.nextLine();
-            while (name.equals("")) {
-                System.out.println(io.getOutputString("strings.enter_the_name_again", null));
-                name = scanner.nextLine();
-            }
-            System.out.println(io.getOutputString("strings.thank_you", null));
+        while (name.equals("")) {
+            name = io.readString("strings.enter_the_name_again", null);
         }
+        io.printString("strings.thank_you", null);
 
         return name;
     }
 
     public resultEnum getTestResult() {
         if (name == null) {
-            //System.out.println(io.getOutputString("strings.no_test_results_yet", null));
             return resultEnum.EMPTY;
         }
 
-        //int requiredAnswerCount = config.getRequiredAnswerCount();
         if (countAnswer >= config.getRequiredAnswerCount())
             return resultEnum.PASSED;
-            //System.out.println(io.getOutputString("strings.test_passed_successfully", new String[] {name}));
         else
             return resultEnum.FAILED;
-            //System.out.println(io.getOutputString("strings.test_passed_failed", new Object[] {name, countAnswer, requiredAnswerCount}));
     }
 }
 
